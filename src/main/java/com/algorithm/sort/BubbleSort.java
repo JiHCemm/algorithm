@@ -1,11 +1,15 @@
 package com.algorithm.sort;
 
+import com.algorithm.util.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.Arrays;//算法的最终时间复杂度为n^2
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
+ * 冒泡排序
  * @author JiHC
  * @since 2020/8/24
  */
@@ -15,10 +19,11 @@ public class BubbleSort {
     public static void main(String[] args) {
         int size = 10;// 数组长度(0 - 10)
         int value = 100;// 值大小(-100 - 100)
-        int[] arr = generateRandomArray (size, value);
-        // 非引用类型可直接使用浅拷贝
-        int[] bubbleArr = arr.clone ();
-        int[] sortArr = arr.clone ();
+        //一维数组 : 数组中每个元素都只带有一个下标
+        int[] arr = ArrayUtils.generateRandomArray (size, value);
+        // 对象拷贝 : 一维数组：深克隆；（重新分配空间，并将元素复制过去） 二维数组：浅克隆。（只传递引用）
+        int[] bubbleArr = arr.clone ();// 进行冒泡排序的数组
+        int[] sortArr = arr.clone ();// 进行系统排序的数组
 
         StringBuilder arrStr = new StringBuilder ("原数组: ");
         for (int number : arr) {
@@ -41,16 +46,7 @@ public class BubbleSort {
         }
         log.info (sortStr);
 
-        log.info (isEqual (bubbleArr, sortArr) ? "成功" : "失败");
-    }
-
-    private static boolean isEqual(int[] arr1, int[] arr2) {
-        for (int i = 0; i < arr1.length; i++) {
-            if (arr1[i] != arr2[i]) {
-                return false;
-            }
-        }
-        return true;
+        log.info (ArrayUtils.isEqual (bubbleArr, sortArr) ? "成功" : "失败");
     }
 
     //N个数字冒泡排序，总共要进行N-1趟比较，每趟的排序次数为(N-i)次比较
@@ -84,17 +80,6 @@ public class BubbleSort {
             }
             flag = false;
         }
-    }
-
-    //生成一个对数器。产生一个随机样本的数组，数组的长度和值都是随机的
-    private static int[] generateRandomArray(int size, int value) {
-        // 生成长度随机的数组，数组的最大长度是size的长度
-        int[] arr = new int[(int) ((size + 1) * Math.random ())];
-        for (int i = 0; i < arr.length; i++) {
-            //针对数组中的每个值都可以随机一下，一个随机数减去另外一个随机数，可能产生正数，也可能产生负数
-            arr[i] = (int) ((value + 1) * Math.random ()) - (int) (value * Math.random ());
-        }
-        return arr;
     }
 
 }
