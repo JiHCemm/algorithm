@@ -1,12 +1,13 @@
 package com.algorithm.sort;
 
 /**
- * 冒泡排序
+ * 冒泡排序 : 重复地走访过要排序的元素列，依次比较两个相邻的元素，如果顺序（如从小到大)错误就把他们交换过来。
  *
  * @author JiHC
  * @since 2020/8/24
  */
 public class BubbleSort {
+
     // N个数字冒泡排序，总共要进行 N-1 轮比较，每轮的排序次数为 (N-i) 次比较
     public static void sort(int[] arr) {
         // 判断边界条件
